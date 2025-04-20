@@ -13,24 +13,26 @@ pipeline {
                     sh 'mvn compile'
                 }
             }
-        } stage('test') {
+        }
+        stage('test') {
             steps {
                 echo 'running unit tests on worker app'
                 dir('worker') {
                     sh 'mvn clean test'
                 }
             }
-        } stage('package') {
+        }
+        stage('package') {
             steps {
                 echo 'packaging worker app into a jarfile'
                 dir('worker') {
                     sh 'mvn package -DskipTests'
-                    archiveArtifacts artifacts: '**/target/*.jar',
-                    fingerprint: true
+                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                 }
             }
         }
-    } post {
+    }
+    post {
         always {
             echo 'the job is complete'
         }
