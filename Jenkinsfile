@@ -187,7 +187,7 @@ pipeline {
     stage('vote-docker-package') {
       agent any
       when {
-        changeset '**/result/**'
+        changeset '**/vote/**'
         branch 'master'
       }
       steps {
